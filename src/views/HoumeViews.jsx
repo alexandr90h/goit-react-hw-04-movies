@@ -1,5 +1,23 @@
+import { useEffect, useState } from "react";
+
 export default function HoumeViews() {
+    const key = 'fa66142a379ae8488ea37ebbe65d511c';
+    const urlImages = 'https://image.tmdb.org/t/p/w500';
+    const [trendFilm, setTrendFilm] = useState([]);
+
+    useEffect(() => {
+        fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${key}`).then(res => res.json()).then(({ results }) => setTrendFilm(prev=>trendFilm===[]?results:([...prev,...results])));
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return (
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam officiis non consequatur ab porro eveniet est maxime fugit ut ipsa et distinctio necessitatibus quam, harum corrupti nihil minus! Harum, impedit? Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque modi nam excepturi quaerat sit magnam quae aperiam sed accusamus? Accusantium nobis labore veritatis ipsa ducimus rerum blanditiis doloribus aut delectus! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas, soluta aspernatur quos, consequatur atque dicta enim velit iusto repudiandae corporis facilis itaque. Corporis repellat maiores necessitatibus modi? Optio, minima tempore! Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum aperiam quo itaque ipsa possimus! Dolor vitae voluptas autem modi maiores architecto suscipit quam ducimus commodi cum neque, aperiam debitis soluta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, voluptas laborum quae ad eos quisquam, esse quos, placeat iste sequi iusto ea. Repellat hic at quisquam possimus. Repellat, voluptatem tempore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla rerum doloremque placeat expedita minima facilis libero, nesciunt laborum quisquam sunt blanditiis tempora velit iure, error, beatae quaerat dolore. Architecto, officia!</p>
+        <ul>
+            {trendFilm.map(({ id, poster_path, title, release_date }) => {
+                return (
+                    <li key={id}>
+                        <img src={urlImages+poster_path} alt="" />
+                        <p>{title}</p> <span>{release_date}</span>
+                    </li>)
+            })}
+        </ul>
     )
 };
