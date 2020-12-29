@@ -1,21 +1,25 @@
 import { Switch, Route } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import Navigation from './Navigation/Navigation';
 import HoumeViews from "./views/HoumeViews";
 import MoviesPage from "./views/MoviesPage";
 import NotFoundViews from "./views/NotFoundViews";
+import MovieDetailsPage from "./MovieDetailsPage/MovieDetailsPage"
 
 function App() {
   return (
     <div className="App">
       <Navigation />
       <Switch>
-        <Route exact path="/">
+        <Route  path="/" exact>
         <HoumeViews/>
       </Route>
-      <Route path="/movies">
+      <Route path="/movies" exact>
         <MoviesPage />
-      </Route>
+        </Route>
+        <Route path="/movies/:movieId">
+          <MovieDetailsPage/>
+        </Route>
       <Route>
         <NotFoundViews />
       </Route>

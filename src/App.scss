@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+}
+.movies-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 2vw;
+  list-style: none;
+  margin: 0;
+  padding: 15px;
+}
+.movies-list-item {
+  img {
+    width: 100%;
+  }
+}

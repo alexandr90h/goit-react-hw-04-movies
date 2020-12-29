@@ -19,6 +19,7 @@ export default function MoviesPage() {
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&page=1&include_adult=false&query=${keyWord}`).then(res=>res.json()).then(({results})=>setSearchFilm(prev=>searchFilm===[]?results:([...prev,...results])))
        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [keyWord])
+    console.log(searchFilm);
     return (
         <form onSubmit={onSubHendSearch}>
             <input type="text" autoComplete="off" name="keyWord" autoFocus placeholder="Search movies"/>
