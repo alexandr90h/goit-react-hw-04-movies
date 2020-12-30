@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 export default function MovieDetailsPage() {
     const { movieId } = useParams();
@@ -12,11 +12,10 @@ export default function MovieDetailsPage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const { poster_path, title, vote_average, overview, genres } = cardMovie;
-    console.log(genres);
     return (
-        <div>
+        <div className="card-movie">
             <img src={urlImages + poster_path} alt="" />
-            <div>
+            <div className="content-card-movie">
                 <h1>{title}</h1>
                 <p>User Score: {vote_average*10}%</p>
                 <h2>Overview</h2>
@@ -24,6 +23,11 @@ export default function MovieDetailsPage() {
                 <h3>Genres</h3>
                 {genres ? <ul>{genres.map(obj => { return (<li key={obj.id}>{obj.name}</li>) })}</ul> : <p>no genres</p>}
             </div>
+            <div className="details-movies-box"><h4>Additional information</h4>
+                <ul>
+                    <Link to="/movies/cast"><li>Cast</li></Link>
+                    <Link to="/movies/reviews"><li>Reviews</li></Link>
+                </ul></div>
         </div>
     )
 };

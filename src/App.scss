@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding: 15px;
 }
 .movies-list {
   display: grid;
@@ -12,5 +13,26 @@
 .movies-list-item {
   img {
     width: 100%;
+  }
+}
+.card-movie {
+  display: grid;
+  grid-template-areas:
+    'img div-content'
+    'details-box details-box';
+  grid-template-columns: 30% 1fr;
+  img {
+    grid-area: img;
+    width: 100%;
+  }
+  .content-card-movie {
+    grid-area: div-content;
+    background-color: burlywood;
+    text-align: left;
+    padding-left: 30px;
+  }
+  .details-movies-box {
+    grid-area: details-box;
+    background-color: aqua;
   }
 }
