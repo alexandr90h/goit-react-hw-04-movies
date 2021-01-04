@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom"
+import { NavLink, Route, useParams, useRouteMatch } from "react-router-dom"
+import Cast from "../Cast/Cast";
+import Reviews from "../Reviews/Reviews";
+import ApiDetailsMovies from "../Services/ApiDetailsMovies";
 
 export default function MovieDetailsPage() {
     const { movieId } = useParams();
-        const key = 'fa66142a379ae8488ea37ebbe65d511c';
+    const {url} = useRouteMatch();
     const urlImages = 'https://image.tmdb.org/t/p/w500';
     const [cardMovie, setCardMovie]=useState({})
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&language=en-US`).then(res => res.json()).then(obj => setCardMovie(obj))
+        ApiDetailsMovies(movieId).then(obj => setCardMovie(obj))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const { poster_path, title, vote_average, overview, genres } = cardMovie;
+    console.log(poster_path);
     return (
         <div className="card-movie">
-            <img src={urlImages + poster_path} alt="" />
+            <img src={urlImages + poster_path } alt="" />
             <div className="content-card-movie">
                 <h1>{title}</h1>
                 <p>User Score: {vote_average*10}%</p>
@@ -25,9 +29,17 @@ export default function MovieDetailsPage() {
             </div>
             <div className="details-movies-box"><h4>Additional information</h4>
                 <ul>
-                    <Link to="/movies/cast"><li>Cast</li></Link>
-                    <Link to="/movies/reviews"><li>Reviews</li></Link>
-                </ul></div>
+                    <li><NavLink to={`${url}/cast`}>Cast</NavLink></li>
+                    <li><NavLink to={`${url}/reviews`}>Reviews</NavLink></li>
+                </ul>
+            <hr />
+            <Route path={`${url}/cast`}>
+                    <Cast id={movieId}/>
+            </Route>
+            <Route path={`${url}/reviews`}>
+               <Reviews id={movieId}/> 
+                </Route>
+            </div>
         </div>
     )
 };
