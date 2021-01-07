@@ -7,5 +7,4 @@ export default function ApiDetailsMovies(id) {
        }
        return Promise.reject(new Error('This movie not found'))
     })
-
 };

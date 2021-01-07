@@ -1,10 +1,16 @@
 .homeLink {
-  margin-right: 10px;
-  color: black;
+  margin-left: 20px;
+  color: rgb(31, 31, 31);
   font-family: Roboto;
   text-decoration: none;
+  font-size: 30px;
+  font-weight: 700;
 }
 .activLink {
-  color: rgb(124, 0, 0);
+  color: rgb(133, 49, 49);
   font-weight: 600;
+}
+nav {
+  border-bottom: 1px solid grey;
+  margin-bottom: 10px;
 }

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import ApiReviews from "../Services/ApiReviews";
 
 export default function Reviews({ id }) {
-    const key = 'fa66142a379ae8488ea37ebbe65d511c';
+    const location = useLocation();
     const [reviewsList, setReviewsList] = useState([]);
+    console.log(location);
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${key}&language=en-US&page=1`).then(res => res.json()).then(obj => setReviewsList(obj.results))
+        ApiReviews(id).then(obj => setReviewsList(obj.results))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (

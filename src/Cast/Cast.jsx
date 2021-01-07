@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import ApiCast from "../Services/ApiCast";
 import styles from './Cast.module.scss';
 
-export default function Cast({id}) {
-    const key = 'fa66142a379ae8488ea37ebbe65d511c';
+export default function Cast({ id }) {
+    const location = useLocation();
     const urlImages = 'https://image.tmdb.org/t/p/w500';
     const [actorList, setActorList] = useState([]);
+    console.log(location);
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${key}&language=en-US`).then(res => res.json()).then(obj => setActorList(obj.cast))
+       ApiCast(id).then(obj => setActorList(obj.cast))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (
